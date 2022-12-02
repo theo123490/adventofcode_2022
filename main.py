@@ -14,6 +14,10 @@ class Player:
     def rps_logic(self, current_move, enemy_move):
         if current_move == enemy_move :
             return 'draw'
+        if current_move.win_to == enemy_move.name :
+            return 'win'
+        if current_move.lose_to == enemy_move.name :
+            return 'lose'
 
 class Move:
     def __init__(self, name, win_to, lose_to):
