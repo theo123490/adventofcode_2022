@@ -1,4 +1,4 @@
-with open("./input.txt") as file:
+with open("./input_2.txt") as file:
     lines = [line.rstrip() for line in file]
 
 class Player:
@@ -66,8 +66,10 @@ self_dict = {
 player_self = Player(self_dict, point_dict)
 player_enemy = Player(enemy_dict, point_dict)
 
-player_self.translate_move('Y')
-player_enemy.translate_move('A')
-player_self.execute_rps(player_enemy.move)
+for line in lines :
+    enemy_move_data, self_move_data = line.split(' ')
+    player_enemy.translate_move(enemy_move_data)
+    player_self.translate_move(self_move_data)
+    player_self.execute_rps(player_enemy.move)
 
 print(player_self.point)
