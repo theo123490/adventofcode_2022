@@ -11,23 +11,26 @@ class Player:
 
     def translate_move(self, data_move):
         self.move = self.move_dict[data_move]
-        return self.move
 
-    def rps_logic(self, current_move, enemy_move):
-        self.current_move = current_move
+    def rps_logic(self, move, enemy_move):
+        self.move = move
         self.enemy_move = enemy_move
-        if current_move == enemy_move :
+        if self.move == enemy_move :
             self.rps_status = 'draw'
-        if current_move.win_to == enemy_move.name :
+        if self.move.win_to == enemy_move.name :
             self.rps_status = 'win'
-        if current_move.lose_to == enemy_move.name :
+        if self.move.lose_to == enemy_move.name :
             self.rps_status = 'lose'
 
     def calculate_point(self):
         status_point = point_dict[self.rps_status]
-        move_point = point_dict[self.current_move.name]
+        move_point = point_dict[self.move.name]
         self.point += status_point
         self.point += move_point
+
+    def execute_rps(self, enemy_move):
+        self.rps_logic(self.move, enemy_move)
+        self.calculate_point()
 
 class Move:
     def __init__(self, name, win_to, lose_to):
@@ -48,15 +51,23 @@ point_dict = {
     'win' : 6
 }
 
+enemy_dict = {
+    'A' : rock,
+    'B' : paper,
+    'C' : scissor
+}
+
 self_dict = {
-    'A' : 'rock',
-    'B' : 'paper',
-    'C' : 'scissor'
+    'X' : rock,
+    'Y' : paper,
+    'Z' : scissor
 }
 
 player_self = Player(self_dict, point_dict)
+player_enemy = Player(enemy_dict, point_dict)
 
-player_self.rps_status = 'win'
-player_self.current_move = rock
-player_self.calculate_point()
+player_self.translate_move('Y')
+player_enemy.translate_move('A')
+player_self.execute_rps(player_enemy.move)
+
 print(player_self.point)
