@@ -1,22 +1,21 @@
-with open("./input_2.txt") as file:
+with open("./input.txt") as file:
     lines = [line.rstrip() for line in file]
 
-calorie_bank = 0
-elf_list = []
+class Player:
+    def __init__(self, move_dict):
+        self.move = ""
+        self.possible_move = ["rock", "paper", "scissor"]
+        self.move_dict = move_dict
 
-def assign_bank(elf_list, calorie_bank):
-    elf_list.append(calorie_bank)
-    return
+    def validify_move(self, input_string):
+        if input_string not in self.possible_move:
+            raise ValueError("input string is not included in possible move")
+    
+self_dict = {
+    'A' : 'rock',
+    'B' : 'paper',
+    'C' : 'scissor'
+}
 
-for line in lines:
-    if len(line) <= 0 :
-        if calorie_bank <= 0 : 
-            continue
-        assign_bank(elf_list, calorie_bank)
-        calorie_bank = 0
-    else:
-        calorie = int(line)
-        calorie_bank += calorie
-
-assign_bank(elf_list, calorie_bank)
-print(max(elf_list))
+player_self = Player(self_dict)
+print(player_self)
