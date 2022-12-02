@@ -11,6 +11,10 @@ class Player:
         self.move = self.move_dict[data_move]
         return self.move
 
+    def rps_logic(self, current_move, enemy_move):
+        if current_move == enemy_move :
+            return 'draw'
+
 self_dict = {
     'A' : 'rock',
     'B' : 'paper',
