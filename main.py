@@ -15,6 +15,16 @@ class Player:
         if current_move == enemy_move :
             return 'draw'
 
+class Move:
+    def __init__(self, name, win_to, lose_to):
+        self.name = name
+        self.win_to = win_to
+        self.lose_to = lose_to
+
+rock = Move("rock", "scissor", "paper")
+paper = Move("paper", "rock", "scissor")
+scissor = Move("scissor", "paper", "rock")
+
 self_dict = {
     'A' : 'rock',
     'B' : 'paper',
