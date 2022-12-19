@@ -19,17 +19,22 @@ func main() {
 			string_value[len(string_value)/2:],
 		}
 
-		for _, value_compartment1 := range compartments[0] {
-			for _, value_compartment2 := range compartments[1] {
-				if value_compartment1 == value_compartment2 {
-					rucksack_item = value_compartment1
-				}
-			}
-		}
-
+		rucksack_item = get_rucksack_item(compartments)
 		items_map[rucksack_item]++
 		fmt.Println(items_map)
 	}
+}
+
+func get_rucksack_item(compartments []string) int32 {
+	for _, value_compartment1 := range compartments[0] {
+		for _, value_compartment2 := range compartments[1] {
+			if value_compartment1 == value_compartment2 {
+				return value_compartment1
+			}
+		}
+	}
+
+	return 0
 }
 
 func readfile_to_string_array(input_file string) []string {
