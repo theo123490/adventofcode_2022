@@ -2,19 +2,23 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 func main() {
-	var content_str string
+	var content_string = readfile_to_string("input.txt")
+	fmt.Println(content_string)
+}
 
-	content, err := ioutil.ReadFile("input.txt")
+func readfile_to_string(input_file string) string {
+
+	content, err := os.ReadFile(input_file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	content_str = fmt.Sprintf("%s", content)
+	content_str := string(content)
 
-	fmt.Println(content_str)
+	return content_str
 }
