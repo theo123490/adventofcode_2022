@@ -9,8 +9,14 @@ import (
 
 func main() {
 	var content_string = readfile_to_string_array("input.txt")
+	var compartments []string
 	for _, string_value := range content_string {
-		fmt.Println(string_value)
+		fmt.Println("----")
+		compartments = []string{
+			string_value[:len(string_value)/2],
+			string_value[len(string_value)/2:],
+		}
+		fmt.Println(compartments)
 	}
 }
 
