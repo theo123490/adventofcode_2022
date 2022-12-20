@@ -52,8 +52,20 @@ func calculate_priority_sum(items_map map[int32]int) int {
 }
 
 func get_rucksack_item(rucksacks []string) int32 {
+	var validator_flag bool
+	var is_item_available bool
 	for _, value_checked_on := range rucksacks[0] {
-		if check_if_item_available(value_checked_on, rucksacks[1]) {
+		is_item_available = false
+		validator_flag = true
+
+		for rucksack_index, rucksack := range rucksacks {
+			if rucksack_index == 0 {
+				continue
+			}
+			is_item_available = check_if_item_available(value_checked_on, rucksack)
+			validator_flag = is_item_available && validator_flag
+		}
+		if validator_flag {
 			return int32(value_checked_on)
 		}
 	}
