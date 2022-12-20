@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -14,9 +15,9 @@ func main() {
 		fmt.Println(value)
 	}
 
-	ticketA := assignmentTicket{2, 4}
-	ticketB := assignmentTicket{1, 5}
-	ticketC := assignmentTicket{1, 3}
+	ticketA, _ := formatToTicket("2-4")
+	ticketB, _ := formatToTicket("1-5")
+	ticketC, _ := formatToTicket("1-3")
 
 	var AInB bool = ticketA.isFullyContainedIn(ticketB)
 	var AInC bool = ticketA.isFullyContainedIn(ticketC)
@@ -45,4 +46,21 @@ func readFileToStringArray(inputFile string) []string {
 	contentString := strings.Split(string(content), "\n")
 
 	return contentString
+}
+
+func formatToTicket(formatString string) (assignmentTicket, error) {
+	var valueString []string = strings.Split(formatString, "-")
+	startValue, errStart := strconv.Atoi(valueString[0])
+	endValue, errEnd := strconv.Atoi(valueString[1])
+
+	if errStart != nil {
+		var emptyTicket assignmentTicket
+		return emptyTicket, errStart
+	}
+	if errEnd != nil {
+		var emptyTicket assignmentTicket
+		return emptyTicket, errEnd
+	}
+
+	return assignmentTicket{startValue, endValue}, nil
 }
