@@ -25,6 +25,9 @@ func main() {
 	fmt.Printf("ticket a is fully contained in c = %v \n", AInC)
 	fmt.Printf("ticket b is fully contained in c = %v \n", ticketB.isFullyContainedIn(ticketC))
 	fmt.Printf("ticket b is fully contained in a = %v \n", ticketB.isFullyContainedIn(ticketA))
+	fmt.Printf("ticket 2-4 is fully contained in 3-8 = %v \n", isFormatMatchupEitherContained("2-4,3-8"))
+	fmt.Printf("ticket 2-4 is fully contained in 1-8 = %v \n", isFormatMatchupEitherContained("2-4,1-8"))
+	fmt.Printf("ticket 4-12 is fully contained in 6-6 = %v \n", isFormatMatchupEitherContained("4-12,6-6"))
 }
 
 type assignmentTicket struct {
@@ -63,4 +66,15 @@ func formatToTicket(formatString string) (assignmentTicket, error) {
 	}
 
 	return assignmentTicket{startValue, endValue}, nil
+}
+
+func isFormatMatchupEitherContained(matchupString string) bool {
+	var matchupStringArray []string = strings.Split(matchupString, ",")
+	matchupTicketA, _ := formatToTicket(matchupStringArray[0])
+	matchupTicketB, _ := formatToTicket(matchupStringArray[1])
+
+	isAinB := matchupTicketA.isFullyContainedIn(matchupTicketB)
+	isBinA := matchupTicketB.isFullyContainedIn(matchupTicketA)
+
+	return (isAinB || isBinA)
 }
