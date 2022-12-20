@@ -10,24 +10,14 @@ import (
 
 func main() {
 	var contentString []string = readFileToStringArray("input.txt")
-
-	for _, value := range contentString {
-		fmt.Println(value)
+	var containedCounter int = 0
+	for _, formatedMatchup := range contentString {
+		if isFormatMatchupEitherContained(formatedMatchup) {
+			containedCounter++
+		}
 	}
+	fmt.Println(containedCounter)
 
-	ticketA, _ := formatToTicket("2-4")
-	ticketB, _ := formatToTicket("1-5")
-	ticketC, _ := formatToTicket("1-3")
-
-	var AInB bool = ticketA.isFullyContainedIn(ticketB)
-	var AInC bool = ticketA.isFullyContainedIn(ticketC)
-	fmt.Printf("ticket a is fully contained in b = %v \n", AInB)
-	fmt.Printf("ticket a is fully contained in c = %v \n", AInC)
-	fmt.Printf("ticket b is fully contained in c = %v \n", ticketB.isFullyContainedIn(ticketC))
-	fmt.Printf("ticket b is fully contained in a = %v \n", ticketB.isFullyContainedIn(ticketA))
-	fmt.Printf("ticket 2-4 is fully contained in 3-8 = %v \n", isFormatMatchupEitherContained("2-4,3-8"))
-	fmt.Printf("ticket 2-4 is fully contained in 1-8 = %v \n", isFormatMatchupEitherContained("2-4,1-8"))
-	fmt.Printf("ticket 4-12 is fully contained in 6-6 = %v \n", isFormatMatchupEitherContained("4-12,6-6"))
 }
 
 type assignmentTicket struct {
