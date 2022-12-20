@@ -52,9 +52,9 @@ func calculate_priority_sum(items_map map[int32]int) int {
 }
 
 func get_rucksack_item(compartments []string) int32 {
-	for _, value_compartment1 := range compartments[0] {
-		if check_if_item_available(value_compartment1, compartments[1]) {
-			return int32(value_compartment1)
+	for _, value_checked_on := range compartments[0] {
+		if check_if_item_available(value_checked_on, compartments[1]) {
+			return int32(value_checked_on)
 		}
 	}
 
