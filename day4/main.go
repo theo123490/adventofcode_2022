@@ -1,12 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Println("this is for day 4")
+	ticketA := assignmentTicket{2, 4}
+	ticketB := assignmentTicket{1, 5}
+	fmt.Println(ticketA.StartLocation)
+	fmt.Println(ticketB.EndLocation)
 }
 
-type assignment_ticket struct {
-	start_location int
-	end_location   int
+type assignmentTicket struct {
+	StartLocation int
+	EndLocation   int
 }
