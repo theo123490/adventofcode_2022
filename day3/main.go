@@ -8,11 +8,19 @@ import (
 )
 
 func main() {
-	var content_string = readfile_to_string_array("input.txt")
-	var compartments []string
-	var rucksack_item int32
 	var items_map map[int32]int = make(map[int32]int)
 	var priority_sum int = 0
+	var content_string []string = readfile_to_string_array("input.txt")
+
+	items_map = sort_item_map(content_string)
+	priority_sum = calculate_priority_sum(items_map)
+	fmt.Printf("the sum of item priority is = %v \n", priority_sum)
+}
+
+func sort_item_map(content_string []string) map[int32]int {
+	var items_map map[int32]int = make(map[int32]int)
+	var compartments []string
+	var rucksack_item int32
 
 	for _, string_value := range content_string {
 		compartments = []string{
@@ -24,8 +32,7 @@ func main() {
 		items_map[rucksack_item]++
 	}
 
-	priority_sum = calculate_priority_sum(items_map)
-	fmt.Printf("the sum of item priority is = %v \n", priority_sum)
+	return items_map
 }
 
 func calculate_priority_sum(items_map map[int32]int) int {
