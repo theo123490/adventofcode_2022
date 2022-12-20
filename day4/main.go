@@ -36,7 +36,7 @@ type assignmentTicket struct {
 }
 
 func (ticket assignmentTicket) isFullyContainedIn(checkingTicket assignmentTicket) bool {
-	return (ticket.StartLocation > checkingTicket.StartLocation) && (ticket.EndLocation < checkingTicket.EndLocation)
+	return (ticket.StartLocation >= checkingTicket.StartLocation) && (ticket.EndLocation <= checkingTicket.EndLocation)
 }
 
 func readFileToStringArray(inputFile string) []string {
