@@ -12,9 +12,7 @@ func main() {
 	var compartments []string
 	var rucksack_item int32
 	var items_map map[int32]int = make(map[int32]int)
-	var priority string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	var priority_sum int = 0
-	var item_value int
 
 	for _, string_value := range content_string {
 		compartments = []string{
@@ -26,6 +24,15 @@ func main() {
 		items_map[rucksack_item]++
 	}
 
+	priority_sum = calculate_priority_sum(items_map)
+	fmt.Printf("the sum of item priority is = %v \n", priority_sum)
+}
+
+func calculate_priority_sum(items_map map[int32]int) int {
+	var priority string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	var priority_sum int = 0
+	var item_value int
+
 	for item_key, item_amount := range items_map {
 		for item_value = 1; item_value <= 52; item_value++ {
 			if priority[item_value-1] == byte(item_key) {
@@ -33,7 +40,8 @@ func main() {
 			}
 		}
 	}
-	fmt.Printf("the sum of item priority is = %v \n", priority_sum)
+
+	return priority_sum
 }
 
 func get_rucksack_item(compartments []string) int32 {
