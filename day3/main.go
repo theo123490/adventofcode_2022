@@ -15,6 +15,22 @@ func main() {
 	items_map = sort_item_map(content_string)
 	priority_sum = calculate_priority_sum(items_map)
 	fmt.Printf("the sum of item priority is = %v \n", priority_sum)
+
+	var rucksack_group []string = []string{"", "", ""}
+	var badge_map map[int32]int = make(map[int32]int)
+	var rucksack_item int32
+	var badge_priority_sum int = 0
+	for rucksack_index, rucksack := range content_string {
+		rucksacg_group_index := rucksack_index % 3
+		rucksack_group[rucksacg_group_index] = rucksack
+
+		if rucksacg_group_index == 2 {
+			rucksack_item = get_rucksack_item(rucksack_group)
+			badge_map[rucksack_item]++
+		}
+	}
+	badge_priority_sum = calculate_priority_sum(badge_map)
+	fmt.Printf("the sum of badge priority is = %v \n", badge_priority_sum)
 }
 
 func sort_item_map(content_string []string) map[int32]int {
@@ -54,6 +70,7 @@ func calculate_priority_sum(items_map map[int32]int) int {
 func get_rucksack_item(rucksacks []string) int32 {
 	var validator_flag bool
 	var is_item_available bool
+
 	for _, value_checked_on := range rucksacks[0] {
 		is_item_available = false
 		validator_flag = true
