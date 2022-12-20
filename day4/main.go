@@ -2,9 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"strings"
 )
 
 func main() {
+	var contentString []string = readFileToStringArray("input.txt")
+
+	for _, value := range contentString {
+		fmt.Println(value)
+	}
+
 	ticketA := assignmentTicket{2, 4}
 	ticketB := assignmentTicket{1, 5}
 	ticketC := assignmentTicket{1, 3}
@@ -24,4 +33,16 @@ type assignmentTicket struct {
 
 func (ticket assignmentTicket) isFullyContainedIn(checkingTicket assignmentTicket) bool {
 	return (ticket.StartLocation > checkingTicket.StartLocation) && (ticket.EndLocation < checkingTicket.EndLocation)
+}
+
+func readFileToStringArray(inputFile string) []string {
+
+	content, err := os.ReadFile(inputFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	contentString := strings.Split(string(content), "\n")
+
+	return contentString
 }
