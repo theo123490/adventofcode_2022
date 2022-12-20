@@ -33,8 +33,7 @@ func main() {
 			}
 		}
 	}
-	fmt.Println(items_map)
-	fmt.Println(priority_sum)
+	fmt.Printf("the sum of item priority is = %v \n", priority_sum)
 }
 
 func get_rucksack_item(compartments []string) int32 {
