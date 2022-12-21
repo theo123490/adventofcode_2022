@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 
 	fileManipulation "theo_adventofcode.com/modules"
 )
@@ -10,15 +12,13 @@ func main() {
 	inputString := fileManipulation.ReadFileToStringArray("input.txt")
 	inputString = fileManipulation.RotateArrayClockwise(inputString)
 	inputString = extractArray(inputString)
-	for _, value := range inputString {
-		fmt.Println(value)
-	}
 
 	stacks := createStacksFromArray(inputString)
 	for _, stackItem := range stacks {
 		fmt.Printf("%v", stackItem)
 	}
 
+	fmt.Println(translateCommand("move 6 from 9 to 5"))
 	stackA := stack{[]rune("abcd")}
 	stackB := stack{[]rune("xyz")}
 	stackA.moveItemTo(&stackB)
@@ -53,4 +53,18 @@ func createStacksFromArray(stringArray []string) []stack {
 	}
 
 	return stacks
+}
+
+func translateCommand(commandString string) []int {
+	commmandStringArray := strings.Split(commandString, " ")
+	move, _ := strconv.Atoi(commmandStringArray[1])
+	from, _ := strconv.Atoi(commmandStringArray[3])
+	to, _ := strconv.Atoi(commmandStringArray[5])
+	var commandData []int = []int{
+		move,
+		from,
+		to,
+	}
+
+	return commandData
 }
