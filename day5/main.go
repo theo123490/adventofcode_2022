@@ -17,15 +17,13 @@ func main() {
 	for _, stackItem := range stacks {
 		fmt.Printf("%v \n", stackItem)
 	}
-	fmt.Println("\n")
-	fmt.Println("------------------")
+	fmt.Println("\n------------------")
 
-	runCommand(&stacks, translateCommand("move 6 from 9 to 5"))
+	runCommand(&stacks, translateCommand("move 3 from 5 to 2"))
 
 	for _, stackItem := range stacks {
 		fmt.Printf("%v \n", stackItem)
 	}
-	// fmt.Println(translateCommand("move 6 from 9 to 5"))
 	stackA := stack{[]rune("abcd")}
 	stackB := stack{[]rune("xyz")}
 	stackA.moveItemTo(&stackB)
@@ -56,6 +54,13 @@ func createStacksFromArray(stringArray []string) []stack {
 	var stacks []stack = make([]stack, 0)
 
 	for _, stackValue := range stringArray {
+		for i := len(stackValue) - 1; i >= 0; i-- {
+			var stackRemovalCounter int = 0
+			if stackValue[i] == 32 {
+				stackRemovalCounter++
+			}
+			stackValue = stackValue[:len(stackValue)-stackRemovalCounter]
+		}
 		stacks = append(stacks, stack{[]rune(stackValue)})
 	}
 
