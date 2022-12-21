@@ -1,8 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	fileManipulation "theo_adventofcode.com/modules"
+)
 
 func main() {
+	inputString := fileManipulation.ReadFileToStringArray("input.txt")
+	for _, value := range inputString {
+		fmt.Println(value)
+	}
 	stackA := stack{[]rune("abcd")}
 	stackB := stack{[]rune("xyz")}
 	stackA.moveItemTo(&stackB)
