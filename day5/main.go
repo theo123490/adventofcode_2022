@@ -14,6 +14,11 @@ func main() {
 		fmt.Println(value)
 	}
 
+	stacks := createStacksFromArray(inputString)
+	for _, stackItem := range stacks {
+		fmt.Printf("%v", stackItem)
+	}
+
 	stackA := stack{[]rune("abcd")}
 	stackB := stack{[]rune("xyz")}
 	stackA.moveItemTo(&stackB)
@@ -38,4 +43,14 @@ func extractArray(stringArray []string) []string {
 		newStringArray = append(newStringArray, stringLine[1:])
 	}
 	return newStringArray
+}
+
+func createStacksFromArray(stringArray []string) []stack {
+	var stacks []stack = make([]stack, 0)
+
+	for _, stackValue := range stringArray {
+		stacks = append(stacks, stack{[]rune(stackValue)})
+	}
+
+	return stacks
 }
