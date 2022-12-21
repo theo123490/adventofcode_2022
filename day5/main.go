@@ -13,21 +13,26 @@ func main() {
 	inputString = fileManipulation.RotateArrayClockwise(inputString)
 	inputString = extractArray(inputString)
 
+	commandInputString := fileManipulation.ReadFileToStringArray("input_command.txt")
+
 	stacks := createStacksFromArray(inputString)
 	for _, stackItem := range stacks {
 		fmt.Printf("%v \n", stackItem)
 	}
 	fmt.Println("\n------------------")
 
-	runCommand(&stacks, translateCommand("move 3 from 5 to 2"))
+	for _, commandString := range commandInputString {
+		command := translateCommand(commandString)
+		runCommand(&stacks, command)
+	}
 
 	for _, stackItem := range stacks {
 		fmt.Printf("%v \n", stackItem)
 	}
-	stackA := stack{[]rune("abcd")}
-	stackB := stack{[]rune("xyz")}
-	stackA.moveItemTo(&stackB)
-	stackA.moveItemTo(&stackB)
+
+	for _, stack := range stacks {
+		fmt.Printf("%c", stack.items[len(stack.items)-1])
+	}
 }
 
 type stack struct {
