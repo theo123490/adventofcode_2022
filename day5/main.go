@@ -11,6 +11,10 @@ func main() {
 	for _, value := range inputString {
 		fmt.Println(value)
 	}
+	inputString = fileManipulation.RotateArrayClockwise(inputString)
+	for _, value := range inputString {
+		fmt.Println(value)
+	}
 	stackA := stack{[]rune("abcd")}
 	stackB := stack{[]rune("xyz")}
 	stackA.moveItemTo(&stackB)

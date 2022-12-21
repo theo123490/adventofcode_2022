@@ -17,3 +17,26 @@ func ReadFileToStringArray(inputFile string) []string {
 
 	return contentString
 }
+
+func RotateArrayClockwise(stringArray []string) []string {
+	var newStringArray []string = make([]string, len(stringArray[0]))
+	for _, row := range stringArray {
+		for xIndex, value := range row {
+			newStringArray[xIndex] = newStringArray[xIndex] + string(value)
+		}
+	}
+
+	for yIndex, row := range newStringArray {
+		newStringArray[yIndex] = reverse(row)
+	}
+
+	return newStringArray
+}
+
+func reverse(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
