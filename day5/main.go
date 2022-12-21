@@ -23,7 +23,7 @@ func main() {
 
 	for _, commandString := range commandInputString {
 		command := translateCommand(commandString)
-		runCommand(&stacks, command)
+		runCommand9001(&stacks, command)
 	}
 
 	for _, stackItem := range stacks {
@@ -42,6 +42,12 @@ type stack struct {
 func (currentStack *stack) moveItemTo(destinationStack *stack) {
 	destinationStack.items = append(destinationStack.items, currentStack.items[len(currentStack.items)-1])
 	currentStack.items = currentStack.items[:len(currentStack.items)-1]
+}
+
+func (currentStack *stack) moveItemTo9001(destinationStack *stack, itemAmountMove int) {
+	itemGettingMoved := currentStack.items[len(currentStack.items)-itemAmountMove : len(currentStack.items)]
+	destinationStack.items = append(destinationStack.items, itemGettingMoved...)
+	currentStack.items = currentStack.items[:len(currentStack.items)-itemAmountMove]
 }
 
 func extractArray(stringArray []string) []string {
@@ -91,4 +97,9 @@ func runCommand(stacks_ *[]stack, command []int) {
 	for i := 0; i < command[0]; i++ {
 		stacks[command[1]-1].moveItemTo(&stacks[command[2]-1])
 	}
+}
+
+func runCommand9001(stacks_ *[]stack, command []int) {
+	stacks := *stacks_
+	stacks[command[1]-1].moveItemTo9001(&stacks[command[2]-1], command[0])
 }
